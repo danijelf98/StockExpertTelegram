@@ -38,7 +38,7 @@ namespace StockExpertTelegram
         static async Task Main()
         {
             // Bot token
-            var botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("7655779543:AAGLHl25rn1qDB2eLqUYR_wWOtTnr2sdfWI"));
+            var botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN"));
 
             var stockService = new StockService();
             var messageHandler = new BotMessagesHandler(stockService);

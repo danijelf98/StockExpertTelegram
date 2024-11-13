@@ -43,16 +43,20 @@ namespace StockExpertTelegram.Services
         {
             try
             {
+                Console.WriteLine($"Attempting to fetch stock price for {ticker}");
+
                 // Fetch the latest quote using Yahoo Finance API
                 var securities = await Yahoo.Symbols(ticker).Fields(Field.RegularMarketPrice).QueryAsync();
 
                 // Check if the result is valid
                 if (securities.TryGetValue(ticker, out var security))
                 {
+                    Console.WriteLine($"Successfully fetched price for {ticker}: {security[Field.RegularMarketPrice]}");
                     // Access the real-time price
                     return security[Field.RegularMarketPrice];
                 }
 
+                Console.WriteLine($"Failed to fetch price for {ticker}");
                 return null;
             }
             catch (Exception ex)

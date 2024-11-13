@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot;
+using YahooFinanceApi;
 
 namespace StockExpertTelegram.Services
 {
@@ -22,6 +23,7 @@ namespace StockExpertTelegram.Services
         {
             if (update.Type == UpdateType.Message && update.Message?.Text != null)
             {
+
                 var chatId = update.Message.Chat.Id;
                 var messageText = update.Message.Text.ToLower();  // Convert text to lowercase for easy comparison
 

@@ -13,7 +13,6 @@ namespace StockExpertTelegram
     {
         static TelegramBotClient? botClient;
 
-        //new line
         private static Timer _timer;
 
         public static void StartPriceCheckService(StockService stockService, TelegramBotClient botClient)
@@ -34,14 +33,28 @@ namespace StockExpertTelegram
             }
         }
 
-
         static async Task Main()
         {
+
             // Bot token
             var botClient = new TelegramBotClient(Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN"));
 
             var stockService = new StockService();
             var messageHandler = new BotMessagesHandler(stockService);
+
+            #region API Test
+
+            var testPrice = await stockService.GetStockPriceAsync("AAPL");
+            if (testPrice.HasValue)
+            {
+                Console.WriteLine($"Test API Access: The price of AAPL is ${testPrice.Value:F2}");
+            }
+            else
+            {
+                Console.WriteLine("Test API Access: Could not fetch the price of AAPL.");
+            }
+
+            #endregion
 
             StartPriceCheckService(stockService, botClient);
 
